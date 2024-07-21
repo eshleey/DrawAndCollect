@@ -4,8 +4,10 @@ public class ThrowBall : MonoBehaviour
 {
     [SerializeField] private GameObject[] Balls;
     [SerializeField] private GameObject ThrowBallCentre;
+    [SerializeField] private GameObject Bucket;
+    [SerializeField] private GameObject[] BucketPoints;
     int ActiveBallIndex;
-
+    int RandomBucketPointIndex;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -27,5 +29,14 @@ public class ThrowBall : MonoBehaviour
                 ActiveBallIndex = 0;
             }
         }
+
+        Invoke("RevealBucket", 0.5f);
+    }
+
+    void RevealBucket()
+    {
+        RandomBucketPointIndex = Random.Range(0, BucketPoints.Length - 1);
+        Bucket.transform.position = BucketPoints[RandomBucketPointIndex].transform.position;
+        Bucket.SetActive(true);
     }
 }
