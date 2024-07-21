@@ -30,8 +30,8 @@ public class DrawLine : MonoBehaviour
     void CreateLine()
     {
         Line = Instantiate(LinePrefab, Vector2.zero, Quaternion.identity);
-        LineRenderer = GetComponent<LineRenderer>();
-        EdgeCollider = GetComponent<EdgeCollider2D>();
+        LineRenderer = Line.GetComponent<LineRenderer>();
+        EdgeCollider = Line.GetComponent<EdgeCollider2D>();
         FingerPositionList.Clear();
         FingerPositionList.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         FingerPositionList.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
