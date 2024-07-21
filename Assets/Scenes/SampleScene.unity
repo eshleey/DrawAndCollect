@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c884eb7aeefce0b48ab54b251640c7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 889865031}
 --- !u!1 &248465468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c884eb7aeefce0b48ab54b251640c7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 889865031}
 --- !u!1 &807580344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,6 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c884eb7aeefce0b48ab54b251640c7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 889865031}
 --- !u!1 &807865267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,6 +1343,7 @@ GameObject:
   - component: {fileID: 889865029}
   - component: {fileID: 889865028}
   - component: {fileID: 889865030}
+  - component: {fileID: 889865031}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1364,6 +1368,7 @@ MonoBehaviour:
   LineRenderer: {fileID: 0}
   EdgeCollider: {fileID: 0}
   FingerPositionList: []
+  Lines: []
 --- !u!4 &889865029
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,6 +1440,20 @@ MonoBehaviour:
   - {fileID: 1313171369}
   - {fileID: 1984436592}
   - {fileID: 1199370654}
+--- !u!114 &889865031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889865027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7414e600bc7a54ea1b28c86f848fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThrowBall: {fileID: 889865030}
+  DrawLine: {fileID: 889865028}
 --- !u!1 &919211878
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c884eb7aeefce0b48ab54b251640c7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 889865031}
 --- !u!1 &1742120419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,6 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c884eb7aeefce0b48ab54b251640c7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 889865031}
 --- !u!1 &1819949597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,7 +2673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1819949598
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class DrawLine : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class DrawLine : MonoBehaviour
     public LineRenderer LineRenderer;
     public EdgeCollider2D EdgeCollider;
     public List<Vector2> FingerPositionList;
+    public List<GameObject> Lines;
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -30,6 +33,7 @@ public class DrawLine : MonoBehaviour
     void CreateLine()
     {
         Line = Instantiate(LinePrefab, Vector2.zero, Quaternion.identity);
+        Lines.Add(Line);
         LineRenderer = Line.GetComponent<LineRenderer>();
         EdgeCollider = Line.GetComponent<EdgeCollider2D>();
         FingerPositionList.Clear();
@@ -46,5 +50,14 @@ public class DrawLine : MonoBehaviour
         LineRenderer.positionCount++;
         LineRenderer.SetPosition(LineRenderer.positionCount - 1, IncomingFingerPosition);
         EdgeCollider.points = FingerPositionList.ToArray();
+    }
+
+    public void Continue()
+    {
+        foreach (var line in Lines)
+        {
+            Destroy(line.gameObject);
+        }
+        Lines.Clear();
     }
 }
