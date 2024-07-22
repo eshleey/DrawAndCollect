@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
+using TMPro;
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 
@@ -14,15 +15,19 @@ public class DrawLine : MonoBehaviour
 
     public List<GameObject> Lines;
     bool CanItBeDrawn;
+    int DrawCount;
+    [SerializeField] private TextMeshProUGUI DrawCountText;
 
     private void Start()
     {
         CanItBeDrawn = false;
+        DrawCount = 3;
+        DrawCountText.text = DrawCount.ToString();
     }
 
     void Update()
     {
-        if (CanItBeDrawn)
+        if (CanItBeDrawn && DrawCount != 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -37,6 +42,15 @@ public class DrawLine : MonoBehaviour
                 {
                     UpdateLine(FingerPosition);
                 }
+            }
+        }
+
+        if (Lines.Count != 0 && DrawCount != 0)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                DrawCount--;
+                DrawCountText.text = DrawCount.ToString();
             }
         }
     }
@@ -70,6 +84,9 @@ public class DrawLine : MonoBehaviour
             Destroy(line.gameObject);
         }
         Lines.Clear();
+
+        DrawCount = 3;
+        DrawCountText.text = DrawCount.ToString();
     }
 
     public void StopDrawLine()
@@ -79,6 +96,7 @@ public class DrawLine : MonoBehaviour
 
     public void StartDrawLine()
     {
+        DrawCount = 3;
         CanItBeDrawn = true;
     }
 }

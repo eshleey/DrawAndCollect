@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         Sounds[1].Play();
         Panels[1].SetActive(true);
+        Panels[2].SetActive(false);
 
         ScoreTexts[1].text = PlayerPrefs.GetInt("BestScore").ToString();
         ScoreTexts[2].text = IncomingBallCount.ToString();
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
         Panels[0].SetActive(false);
         ThrowBall.StartGame();
         DrawLine.StartDrawLine();
+        Panels[2].SetActive(true);
     }
 
     public void TryAgain()
