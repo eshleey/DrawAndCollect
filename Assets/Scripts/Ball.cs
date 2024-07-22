@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Bucket Lath"))
         {
             gameObject.SetActive(false);
-            GameManager.Continue();
+            GameManager.Continue(transform.position);
         }
 
         if (collision.gameObject.CompareTag("Edge Bottom"))

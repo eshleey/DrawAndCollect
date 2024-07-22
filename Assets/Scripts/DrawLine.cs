@@ -11,21 +11,32 @@ public class DrawLine : MonoBehaviour
     public LineRenderer LineRenderer;
     public EdgeCollider2D EdgeCollider;
     public List<Vector2> FingerPositionList;
+
     public List<GameObject> Lines;
+    bool CanItBeDrawn;
+
+    private void Start()
+    {
+        CanItBeDrawn = false;
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (CanItBeDrawn)
         {
-            CreateLine();
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            Vector2 FingerPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            if (Vector2.Distance(FingerPosition, FingerPositionList[^1]) > 0.1f)
+            if (Input.GetMouseButtonDown(0))
             {
-                UpdateLine(FingerPosition);
+                CreateLine();
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                Vector2 FingerPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                if (Vector2.Distance(FingerPosition, FingerPositionList[^1]) > 0.1f)
+                {
+                    UpdateLine(FingerPosition);
+                }
             }
         }
     }
@@ -59,5 +70,15 @@ public class DrawLine : MonoBehaviour
             Destroy(line.gameObject);
         }
         Lines.Clear();
+    }
+
+    public void StopDrawLine()
+    {
+        CanItBeDrawn = false;
+    }
+
+    public void StartDrawLine()
+    {
+        CanItBeDrawn = true;
     }
 }

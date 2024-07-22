@@ -12,7 +12,7 @@ public class ThrowBall : MonoBehaviour
     int RandomBucketPointIndex;
     bool Lock;
 
-    private void Start()
+    public void StartGame()
     {
         StartCoroutine(ThrowBallSystem());
     }
@@ -58,5 +58,10 @@ public class ThrowBall : MonoBehaviour
     {
         Lock = false;
         Bucket.SetActive(false);
+    }
+
+    public void StopThrowBall()
+    {
+        StopAllCoroutines();
     }
 }
