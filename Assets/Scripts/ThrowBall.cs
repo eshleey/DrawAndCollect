@@ -46,6 +46,7 @@ public class ThrowBall : MonoBehaviour
                 Bucket.transform.position = BucketPoints[RandomBucketPointIndex].transform.position;
                 Bucket.SetActive(true);
                 Lock = true;
+                Invoke("CheckBall", 6f);
             }
             else
             {
@@ -58,10 +59,19 @@ public class ThrowBall : MonoBehaviour
     {
         Lock = false;
         Bucket.SetActive(false);
+        CancelInvoke();
     }
 
     public void StopThrowBall()
     {
         StopAllCoroutines();
+    }
+
+    void CheckBall()
+    {
+        if (Lock)
+        {
+            GetComponent<GameManager>().GameOver();
+        }
     }
 }
