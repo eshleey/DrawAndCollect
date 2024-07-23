@@ -12,6 +12,15 @@ public class ThrowBall : MonoBehaviour
     int RandomBucketPointIndex;
     bool Lock;
 
+    public static int BallsThrownCount;
+    public static int ThrowBallCount;
+
+    private void Start()
+    {
+        BallsThrownCount = 0;
+        ThrowBallCount = 0;
+    }
+
     public void StartGame()
     {
         StartCoroutine(ThrowBallSystem());
@@ -24,21 +33,21 @@ public class ThrowBall : MonoBehaviour
             if (!Lock)
             {
                 yield return new WaitForSeconds(0.5f);
-                Balls[ActiveBallIndex].transform.position = ThrowBallCentre.transform.position;
-                Balls[ActiveBallIndex].SetActive(true);
 
-                float Angle = Random.Range(70f, 110f);
-                Vector3 Pos = Quaternion.AngleAxis(Angle, Vector3.forward) * Vector3.right;
-
-                Balls[ActiveBallIndex].GetComponent<Rigidbody2D>().AddForce(Pos * 750);
-
-                if (ActiveBallIndex != Balls.Length - 1)
+                if (ThrowBallCount != 0 && ThrowBallCount % 5 == 0)
                 {
-                    ActiveBallIndex++;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        ThrowBallAndAdjustment();
+                    }
+                    BallsThrownCount = 2;
+                    ThrowBallCount++;
                 }
                 else
                 {
-                    ActiveBallIndex = 0;
+                    ThrowBallAndAdjustment();
+                    BallsThrownCount = 1;
+                    ThrowBallCount++;
                 }
 
                 yield return new WaitForSeconds(0.7f);
@@ -57,9 +66,27 @@ public class ThrowBall : MonoBehaviour
 
     public void Continue()
     {
-        Lock = false;
-        Bucket.SetActive(false);
-        CancelInvoke();
+        if (BallsThrownCount == 1)
+        {
+            Lock = false;
+            Bucket.SetActive(false);
+            CancelInvoke();
+            BallsThrownCount--;
+        }
+        else
+        {
+            BallsThrownCount--;
+        }
+    }
+
+    float GiveAngle(float value1, float value2)
+    {
+        return Random.Range(value1, value2);
+    }
+
+    Vector3 GivePosition(float IncomingAngle)
+    {
+        return Quaternion.AngleAxis(IncomingAngle, Vector3.forward) * Vector3.right;
     }
 
     public void StopThrowBall()
@@ -72,6 +99,21 @@ public class ThrowBall : MonoBehaviour
         if (Lock)
         {
             GetComponent<GameManager>().GameOver();
+        }
+    }
+
+    void ThrowBallAndAdjustment()
+    {
+        Balls[ActiveBallIndex].transform.position = ThrowBallCentre.transform.position;
+        Balls[ActiveBallIndex].SetActive(true);
+        Balls[ActiveBallIndex].GetComponent<Rigidbody2D>().AddForce(GivePosition(GiveAngle(70f, 110f)) * 750);
+        if (ActiveBallIndex != Balls.Length - 1)
+        {
+            ActiveBallIndex++;
+        }
+        else
+        {
+            ActiveBallIndex = 0;
         }
     }
 }

@@ -79,14 +79,17 @@ public class DrawLine : MonoBehaviour
 
     public void Continue()
     {
-        foreach (var line in Lines)
+        if (ThrowBall.BallsThrownCount == 0)
         {
-            Destroy(line.gameObject);
-        }
-        Lines.Clear();
+            foreach (var line in Lines)
+            {
+                Destroy(line.gameObject);
+            }
+            Lines.Clear();
 
-        DrawCount = 3;
-        DrawCountText.text = DrawCount.ToString();
+            DrawCount = 3;
+            DrawCountText.text = DrawCount.ToString();
+        }
     }
 
     public void StopDrawLine()

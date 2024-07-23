@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        IncomingBallCount = 0;
+
         if (PlayerPrefs.HasKey("BestScore"))
         {
             ScoreTexts[0].text = PlayerPrefs.GetInt("BestScore").ToString();
